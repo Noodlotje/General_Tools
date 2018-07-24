@@ -1,0 +1,16 @@
+## Power calculation for Sample Size Needed to Test Odds Ratio: Equality
+#Group 'A' Proportion, pA
+pA=0.40
+#Group 'B' Proportion, pB
+pB=0.25
+#Sampling Ratio, κ=nA/nB
+kappa=1
+#Type I error rate
+alpha=0.05
+#Power = 1−β, beta = 1-power
+beta=0.20
+(OR=pA*(1-pB)/pB/(1-pA)) # 2
+(nB=(1/(kappa*pA*(1-pA))+1/(pB*(1-pB)))*((qnorm(1-alpha/2)+qnorm(1-beta))/log(OR))^2)
+ceiling(nB) # 156
+z=log(OR)*sqrt(nB)/sqrt(1/(kappa*pA*(1-pA))+1/(pB*(1-pB)))
+(Power=pnorm(z-qnorm(1-alpha/2))+pnorm(-z-qnorm(1-alpha/2)))
